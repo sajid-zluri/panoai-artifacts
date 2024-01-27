@@ -1,0 +1,489 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "description": "Actions representing a workflow in the Zluri system",
+    "properties": {
+        "org_id": {
+            "type": "object",
+            "description": "Unique identifier of the organization",
+            "properties": {
+                "$oid": {
+                    "type": "string",
+                    "description": "ID"
+                }
+            },
+            "$source": "organizations._id",
+            "required": [
+                "$oid"
+            ]
+        },
+        "type": {
+            "type": "string",
+            "description": "Type of the task. Can only be onboarding or offboarding",
+            "enum": [
+                "onboarding",
+                "offboarding"
+            ],
+            "$source": "integrationactions.metaData.types.name"
+        },
+        "users": {
+            "type": "array",
+            "description": "List of users associated with the task",
+            "items": {
+                "type": "object",
+                "description": "User associated with the task",
+                "properties": {
+                    "user_id": {
+                        "type": "object",
+                        "description": "Unique identifier of the user",
+                        "properties": {
+                            "$oid": {
+                                "type": "string",
+                                "description": "Unique identifier of the user"
+                            }
+                        },
+                        "$source": "orgusers._id",
+                        "required": [
+                            "$oid"
+                        ]
+                    },
+                    "user_name": {
+                        "type": "string",
+                        "description": "Name of the user",
+                        "$source": "orgusers.name"
+                    },
+                    "user_logo": {
+                        "type": "string",
+                        "description": "URL of the user's logo"
+                    }
+                },
+                "required": [
+                    "user_id",
+                    "user_name"
+                ]
+            }
+        },
+        "name": {
+            "type": "string",
+            "description": "Name of the task"
+        },
+        "nodes": {
+            "type": "array",
+            "description": "List of nodes associated with the task",
+            "items": {
+                "type": "object",
+                "description": "Node associated with the task",
+                "properties": {
+                    "_id": {
+                        "type": "object",
+                        "description": "Unique identifier of the node",
+                        "properties": {
+                            "$oid": {
+                                "type": "string",
+                                "description": "Unique identifier of the node"
+                            }
+                        },
+                        "$source": "orgintegrations._id",
+                        "required": [
+                            "$oid"
+                        ]
+                    },
+                    "app_id": {
+                        "type": "object",
+                        "description": "Unique identifier of the application",
+                        "properties": {
+                            "$oid": {
+                                "type": "string",
+                                "description": "Unique identifier of the application"
+                            }
+                        },
+                        "$source": "orgapplications._id",
+                        "required": [
+                            "$oid"
+                        ]
+                    },
+                    "app_name": {
+                        "type": "string",
+                        "description": "Name of the application",
+                        "$source": "orgapplications.name"
+                    },
+                    "app_logo": {
+                        "type": "string",
+                        "description": "URL of the application's logo"
+                    },
+                    "app_url": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "URL of the application"
+                    },
+                    "actions": {
+                        "type": "array",
+                        "description": "List of actions associated with the node",
+                        "items": {
+                            "type": "object",
+                            "description": "Action associated with the node",
+                            "properties": {
+                                "_id": {
+                                    "type": "object",
+                                    "description": "Unique identifier of the action",
+                                    "properties": {
+                                        "$oid": {
+                                            "type": "string",
+                                            "description": "Unique identifier of the action"
+                                        }
+                                    },
+                                    "$source": "integrationactions._id",
+                                    "required": [
+                                        "$oid"
+                                    ]
+                                },
+                                "workflow_action_id": {
+                                    "type": "object",
+                                    "description": "Unique identifier of the workflow action",
+                                    "properties": {
+                                        "$oid": {
+                                            "type": "string",
+                                            "description": "Unique identifier of the workflow action"
+                                        }
+                                    },
+                                    "$source": "integrationactions._id",
+                                    "required": [
+                                        "$oid"
+                                    ]
+                                },
+                                "action_id": {
+                                    "type": "object",
+                                    "description": "Unique identifier of the action",
+                                    "properties": {
+                                        "$oid": {
+                                            "type": "string",
+                                            "description": "Unique identifier of the action"
+                                        }
+                                    },
+                                    "$source": "integrationactions._id"
+                                },
+                                "org_integration_id": {
+                                    "type": "object",
+                                    "description": "Unique identifier of the organization integration",
+                                    "properties": {
+                                        "$oid": {
+                                            "type": "string",
+                                            "description": "Unique identifier of the organization integration"
+                                        }
+                                    },
+                                    "$source": "orgintegrations._id",
+                                    "required": [
+                                        "$oid"
+                                    ]
+                                },
+                                "action_type": {
+                                    "type": "string",
+                                    "description": "Type of the action",
+                                    "$source": "integrationactions.actionType"
+                                },
+                                "action_name": {
+                                    "type": "string",
+                                    "description": "Name of the action",
+                                    "$source": "integrationactions.name"
+                                },
+                                "action_description": {
+                                    "type": "string",
+                                    "description": "Description of the action",
+                                    "$source": "integrationactions.description"
+                                },
+                                "break_on_error": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the action should break on error"
+                                },
+                                "action_data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$comment": "As many as users we are applying the action to",
+                                        "properties": {
+                                            "k": {
+                                                "type": "string",
+                                                "$comment": "Object ID referencing user collection/ID"
+                                            },
+                                            "v": {
+                                                "type": "object",
+                                                "$comment": "To some extent derived from action in Mongo DB. Inputs to the action to transform into the external API call"
+                                            }
+                                        }
+                                    }
+                                },
+                                "manual_action_template_id": {
+                                    "type": "string",
+                                    "description": "Identifier of the manual action template"
+                                }
+                            },
+                            "required": [
+                                "_id",
+                                "workflow_action_id",
+                                "action_type",
+                                "action_name",
+                                "action_description"
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "_id",
+                    "app_id",
+                    "app_name",
+                    "app_logo",
+                    "app_url",
+                    "actions"
+                ]
+            }
+        },
+        "created_by_user_name": {
+            "type": "string",
+            "description": "Name of the user who created the task",
+            "$source": "orgusers.name"
+        },
+        "created_by_user_id": {
+            "type": "object",
+            "description": "Unique identifier of the user who created the task",
+            "properties": {
+                "$oid": {
+                    "type": "string",
+                    "description": "Unique identifier of the user who created the task"
+                }
+            },
+            "$source": "orgusers._id",
+            "required": [
+                "$oid"
+            ]
+        },
+        "edited_by_user_id": {
+            "type": "object",
+            "description": "Unique identifier of the user who edited the task",
+            "properties": {
+                "$oid": {
+                    "type": "string",
+                    "description": "Unique identifier of the user who edited the task"
+                }
+            },
+            "$source": "orgusers._id",
+            "required": [
+                "$oid"
+            ]
+        },
+        "edited_by_user_name": {
+            "type": "string",
+            "description": "Name of the user who edited the task",
+            "$source": "orgusers.name"
+        },
+        "created_on": {
+            "type": "object",
+            "description": "Timestamp of when the task was created.",
+            "properties": {
+                "$date": {
+                    "type": "string",
+                    "description": "Timestamp of when the task was created. ISO 8601 format",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{3})?Z$"
+                }
+            },
+            "required": [
+                "$date"
+            ]
+        },
+        "updated_at": {
+            "type": "object",
+            "description": "Timestamp of when the task was updated",
+            "properties": {
+                "$date": {
+                    "type": "string",
+                    "description": "Timestamp of when the task was updated. ISO 8601 format",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{3})?Z$"
+                }
+            },
+            "required": [
+                "$date"
+            ]
+        }
+    },
+    "required": [
+        "org_id",
+        "type",
+        "users",
+        "name",
+        "nodes",
+        "created_by_user_name",
+        "created_by_user_id",
+        "edited_by_user_id",
+        "edited_by_user_name",
+        "created_on",
+        "updated_at"
+    ],
+    "examples": [
+        {
+            "org_id": {
+                "$oid": "63b4098852ac7b521061bee6"
+            },
+            "type": "onboarding",
+            "users": [
+                {
+                    "user_id": {
+                        "$oid": "6516e382d119645c51af0da9"
+                    },
+                    "user_name": "Surbhi Joshi"
+                },
+                {
+                    "user_id": {
+                        "$oid": "6516e382d119645c51af0f14"
+                    },
+                    "user_name": "Jenna Hall"
+                },
+                {
+                    "user_id": {
+                        "$oid": "6516e382d119645c51af0f4f"
+                    },
+                    "user_name": "Kruti Baraiya"
+                }
+            ],
+            "nodes": [
+                {
+                    "_id": {
+                        "$oid": "61b657ce4d245c5538956ea2"
+                    },
+                    "app_id": {
+                        "$oid": "63c3955d26cd9846f8785711"
+                    },
+                    "app_name": "Slack",
+                    "actions": [
+                        {
+                            "_id": {
+                                "$oid": "61b657ce4d245c5538956ea2"
+                            },
+                            "workflow_action_id": {
+                                "$oid": "61b657ce4d245c5538956ea2"
+                            },
+                            "action_type": "action",
+                            "action_name": "Add a new user to workspace",
+                            "action_description": "Adds a new user in slack workspace",
+                            "org_integration_id": {
+                                "$oid": "640b0586211aa571a0536869"
+                            }
+                        }
+                    ],
+                    "app_url": "https://slack.com/features"
+                },
+                {
+                    "_id": {
+                        "$oid": "61e94ffd953cc065e198d0c3"
+                    },
+                    "app_id": {
+                        "$oid": "63b40baaf2d2476e6ff0bf0c"
+                    },
+                    "app_name": "Google Workspace",
+                    "actions": [
+                        {
+                            "_id": {
+                                "$oid": "61e94ffd953cc065e198d0c3"
+                            },
+                            "workflow_action_id": {
+                                "$oid": "61e94ffd953cc065e198d0c3"
+                            },
+                            "action_type": "action",
+                            "action_name": "Add a new user to workspace",
+                            "action_description": "Adds a new user in Google workspace",
+                            "org_integration_id": {
+                                "$oid": "63b409aa5d8b27b8b341649d"
+                            }
+                        }
+                    ],
+                    "app_url": "https://workspace.google.com/"
+                }
+            ],
+            "created_by_user_name": "Surbhi Joshi",
+            "created_by_user_id": {
+                "$oid": "6516e382d119645c51af0da9"
+            },
+            "edited_by_user_id": {
+                "$oid": "6516e382d119645c51af0da9"
+            },
+            "edited_by_user_name": "Surbhi Joshi",
+            "name": "onboarding Surbhi Joshi, Jenna Hall, and Kruti Baraiya to Slack",
+            "created_on": {
+                "$date": "2022-12-29T01:20:17.743Z"
+            },
+            "updated_at": {
+                "$date": "2022-12-29T01:20:17.743Z"
+            }
+        },
+        {
+            "org_id": {
+                "$oid": "63b4098852ac7b521061bee6"
+            },
+            "type": "onboarding",
+            "users": [
+                {
+                    "user_id": {
+                        "$oid": "6516e382d119645c51af0da9"
+                    },
+                    "user_name": "Surbhi Joshi"
+                },
+                {
+                    "user_id": {
+                        "$oid": "6516e382d119645c51af0f14"
+                    },
+                    "user_name": "Jenna Hall"
+                },
+                {
+                    "user_id": {
+                        "$oid": "6516e382d119645c51af0f4f"
+                    },
+                    "user_name": "Kruti Baraiya"
+                }
+            ],
+            "nodes": [
+                {
+                    "_id": {
+                        "$oid": "61e94ffd953cc065e198d0c3"
+                    },
+                    "app_id": {
+                        "$oid": "63b40baaf2d2476e6ff0bf0c"
+                    },
+                    "app_name": "Google Workspace",
+                    "app_logo": "https://assets2.zluri.com/logos/Google_Workspace-60925fe2c733aa2e5d66ce9d-1625037823.png",
+                    "actions": [
+                        {
+                            "_id": {
+                                "$oid": "61e94ffd953cc065e198d0c3"
+                            },
+                            "workflow_action_id": {
+                                "$oid": "61e94ffd953cc065e198d0c3"
+                            },
+                            "action_type": "manual",
+                            "action_name": "Add User",
+                            "action_description": "Add a new user in your gsuite account",
+                            "org_integration_id": {
+                                "$oid": "63b409aa5d8b27b8b341649d"
+                            }
+                        }
+                    ],
+                    "app_url": "https://workspace.google.com/"
+                }
+            ],
+            "created_by_user_name": "Surbhi Joshi",
+            "created_by_user_id": {
+                "$oid": "6516e382d119645c51af0da9"
+            },
+            "edited_by_user_id": {
+                "$oid": "6516e382d119645c51af0da9"
+            },
+            "edited_by_user_name": "Surbhi Joshi",
+            "name": "Add Phone to user",
+            "created_on": {
+                "$date": "2023-01-03T10:55:48.652Z"
+            },
+            "updated_at": {
+                "$date": "2023-01-03T10:55:48.652Z"
+            }
+        }
+    ]
+}

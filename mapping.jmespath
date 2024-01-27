@@ -1,0 +1,46 @@
+{
+    "org_id": {
+        "$oid": organizations._id
+    },
+    "type": orgapplications[0].integrationactions[0].metaData.types.name,
+    "users": orgusers[].{
+        "user_id": {
+            "$oid": _id
+        },
+        "user_name": name
+    },
+    "nodes": orgapplications[].{
+        "_id": {
+            "$oid": orgintegrations._id
+        },
+        "app_id": {
+            "$oid": orgapplications._id
+        },
+        "app_name": name,
+        "actions": integrationactions[].{
+            "_id": {
+                "$oid": _id
+            },
+            "workflow_action_id": {
+                "$oid": _id
+            },
+            "action_id": {
+                "$oid": _id
+            },
+            "action_type": actionType,
+            "action_name": name,
+            "action_description": description,
+            "org_integration_id": {
+                "$oid": orgintegrations._id
+            }
+        }
+    },
+    "created_by_user_name": created_by.name,
+    "created_by_user_id": {
+        "$oid": created_by._id
+    },
+    "edited_by_user_id": {
+        "$oid": edited_by._id
+    },
+    "edited_by_user_name": edited_by.name,
+}

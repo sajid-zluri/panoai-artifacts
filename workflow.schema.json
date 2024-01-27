@@ -111,6 +111,13 @@
                         "type": "string",
                         "description": "URL of the application's logo"
                     },
+                    "app_url": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "URL of the application"
+                    },
                     "actions": {
                         "type": "array",
                         "description": "List of actions associated with the node",
@@ -213,21 +220,13 @@
                                 }
                             },
                             "required": [
-                                "is_validated",
                                 "_id",
+                                "workflow_action_id",
                                 "action_type",
                                 "action_name",
-                                "action_description",
-                                "workflow_action_id"
+                                "action_description"
                             ]
                         }
-                    },
-                    "app_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "URL of the application"
                     }
                 },
                 "required": [
@@ -235,8 +234,8 @@
                     "app_id",
                     "app_name",
                     "app_logo",
-                    "actions",
-                    "app_url"
+                    "app_url",
+                    "actions"
                 ]
             }
         },
@@ -328,45 +327,24 @@
             "type": "onboarding",
             "users": [
                 {
-                    "_id": {
-                        "$oid": "6516e382d119645c51af0da9"
-                    },
                     "user_id": {
                         "$oid": "6516e382d119645c51af0da9"
                     },
                     "user_name": "Surbhi Joshi"
                 },
                 {
-                    "_id": {
-                        "$oid": "6516e382d119645c51af0f14"
-                    },
                     "user_id": {
                         "$oid": "6516e382d119645c51af0f14"
                     },
                     "user_name": "Jenna Hall"
                 },
                 {
-                    "_id": {
-                        "$oid": "6516e382d119645c51af0f4f"
-                    },
                     "user_id": {
                         "$oid": "6516e382d119645c51af0f4f"
                     },
                     "user_name": "Kruti Baraiya"
                 }
             ],
-            "created_by_user_name": "Surbhi Joshi",
-            "created_by_user_id": {
-                "$oid": "6516e382d119645c51af0da9"
-            },
-            "edited_by_user_id": {
-                "$oid": "6516e382d119645c51af0da9"
-            },
-            "edited_by_user_name": "Surbhi Joshi",
-            "name": "onboarding Surbhi Joshi, Jenna Hall, and Kruti Baraiya to Slack",
-            "created_on": {
-                "$date": "2022-12-29T01:20:17.743Z"
-            },
             "nodes": [
                 {
                     "_id": {
@@ -378,19 +356,17 @@
                     "app_name": "Slack",
                     "actions": [
                         {
-                            "is_validated": true,
                             "_id": {
                                 "$oid": "61b657ce4d245c5538956ea2"
                             },
-                            "org_integration_id": {
-                                "$oid": "640b0586211aa571a0536869"
+                            "workflow_action_id": {
+                                "$oid": "61b657ce4d245c5538956ea2"
                             },
                             "action_type": "action",
                             "action_name": "Add a new user to workspace",
                             "action_description": "Adds a new user in slack workspace",
-                            "break_on_error": false,
-                            "workflow_action_id": {
-                                "$oid": "61b657ce4d245c5538956ea2"
+                            "org_integration_id": {
+                                "$oid": "640b0586211aa571a0536869"
                             }
                         }
                     ],
@@ -406,30 +382,38 @@
                     "app_name": "Google Workspace",
                     "actions": [
                         {
-                            "is_validated": true,
                             "_id": {
                                 "$oid": "61e94ffd953cc065e198d0c3"
                             },
-                            "org_integration_id": {
-                                "$oid": "63b409aa5d8b27b8b341649d"
+                            "workflow_action_id": {
+                                "$oid": "61e94ffd953cc065e198d0c3"
                             },
                             "action_type": "action",
                             "action_name": "Add a new user to workspace",
                             "action_description": "Adds a new user in Google workspace",
-                            "break_on_error": false,
-                            "workflow_action_id": {
-                                "$oid": "61e94ffd953cc065e198d0c3"
+                            "org_integration_id": {
+                                "$oid": "63b409aa5d8b27b8b341649d"
                             }
                         }
                     ],
                     "app_url": "https://workspace.google.com/"
                 }
             ],
-            "updated_at": {
+            "created_by_user_name": "Surbhi Joshi",
+            "created_by_user_id": {
+                "$oid": "6516e382d119645c51af0da9"
+            },
+            "edited_by_user_id": {
+                "$oid": "6516e382d119645c51af0da9"
+            },
+            "edited_by_user_name": "Surbhi Joshi",
+            "name": "onboarding Surbhi Joshi, Jenna Hall, and Kruti Baraiya to Slack",
+            "created_on": {
                 "$date": "2022-12-29T01:20:17.743Z"
             },
-            "__v": 1,
-            "is_scheduled": false
+            "updated_at": {
+                "$date": "2022-12-29T01:20:17.743Z"
+            }
         },
         {
             "org_id": {
@@ -438,31 +422,51 @@
             "type": "onboarding",
             "users": [
                 {
-                    "_id": {
-                        "$oid": "6516e382d119645c51af0da9"
-                    },
                     "user_id": {
                         "$oid": "6516e382d119645c51af0da9"
                     },
                     "user_name": "Surbhi Joshi"
                 },
                 {
-                    "_id": {
-                        "$oid": "6516e382d119645c51af0f14"
-                    },
                     "user_id": {
                         "$oid": "6516e382d119645c51af0f14"
                     },
                     "user_name": "Jenna Hall"
                 },
                 {
-                    "_id": {
-                        "$oid": "6516e382d119645c51af0f4f"
-                    },
                     "user_id": {
                         "$oid": "6516e382d119645c51af0f4f"
                     },
                     "user_name": "Kruti Baraiya"
+                }
+            ],
+            "nodes": [
+                {
+                    "_id": {
+                        "$oid": "61e94ffd953cc065e198d0c3"
+                    },
+                    "app_id": {
+                        "$oid": "63b40baaf2d2476e6ff0bf0c"
+                    },
+                    "app_name": "Google Workspace",
+                    "app_logo": "https://assets2.zluri.com/logos/Google_Workspace-60925fe2c733aa2e5d66ce9d-1625037823.png",
+                    "actions": [
+                        {
+                            "_id": {
+                                "$oid": "61e94ffd953cc065e198d0c3"
+                            },
+                            "workflow_action_id": {
+                                "$oid": "61e94ffd953cc065e198d0c3"
+                            },
+                            "action_type": "manual",
+                            "action_name": "Add User",
+                            "action_description": "Add a new user in your gsuite account",
+                            "org_integration_id": {
+                                "$oid": "63b409aa5d8b27b8b341649d"
+                            }
+                        }
+                    ],
+                    "app_url": "https://workspace.google.com/"
                 }
             ],
             "created_by_user_name": "Surbhi Joshi",
@@ -477,55 +481,9 @@
             "created_on": {
                 "$date": "2023-01-03T10:55:48.652Z"
             },
-            "nodes": [
-                {
-                    "_id": {
-                        "$oid": "61e94ffd953cc065e198d0c3"
-                    },
-                    "app_id": {
-                        "$oid": "63b40baaf2d2476e6ff0bf0c"
-                    },
-                    "app_name": "Google Workspace",
-                    "app_logo": "https://assets2.zluri.com/logos/Google_Workspace-60925fe2c733aa2e5d66ce9d-1625037823.png",
-                    "actions": [
-                        {
-                            "is_validated": true,
-                            "_id": {
-                                "$oid": "61e94ffd953cc065e198d0c3"
-                            },
-                            "org_integration_id": {
-                                "$oid": "63b409aa5d8b27b8b341649d"
-                            },
-                            "action_type": "manual",
-                            "action_name": "Add User",
-                            "action_description": "Add a new user in your gsuite account",
-                            "break_on_error": false,
-                            "workflow_action_id": {
-                                "$oid": "61e94ffd953cc065e198d0c3"
-                            },
-                            "action_data": {
-                                "title": "Add User",
-                                "description": "Add a new user in your gsuite account",
-                                "assignee": {
-                                    "_id": "6516e382d119645c51af0da9",
-                                    "name": "Surbhi Joshi",
-                                    "email": "surbhi.joshi@zluri.com",
-                                    "logo": "https://ui-avatars.com/api/?name=Surbhi+Joshi"
-                                },
-                                "due_date": "2023-10-29T09:49:41.265Z",
-                                "message": "Hi Surbhi, Please add this user to Google Workspace"
-                            },
-                            "manual_action_template_id": "custom"
-                        }
-                    ],
-                    "app_url": "https://workspace.google.com/"
-                }
-            ],
             "updated_at": {
                 "$date": "2023-01-03T10:55:48.652Z"
-            },
-            "__v": 1,
-            "is_scheduled": false
+            }
         }
     ]
 }

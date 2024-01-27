@@ -9,14 +9,6 @@
         },
         "user_name": name
     },
-    "created_by_user_name": created_by.name,
-    "created_by_user_id": {
-        "$oid": created_by._id
-    },
-    "edited_by_user_id": {
-        "$oid": edited_by._id
-    },
-    "edited_by_user_name": edited_by.name,
     "nodes": orgapplications[].{
         "_id": {
             "$oid": orgintegrations._id
@@ -35,12 +27,20 @@
             "action_id": {
                 "$oid": _id
             },
-            "org_integration_id": {
-                "$oid": orgintegrations._id
-            },
             "action_type": actionType,
             "action_name": name,
-            "action_description": description
+            "action_description": description,
+            "org_integration_id": {
+                "$oid": orgintegrations._id
+            }
         }
-    }
+    },
+    "created_by_user_name": created_by.name,
+    "created_by_user_id": {
+        "$oid": created_by._id
+    },
+    "edited_by_user_id": {
+        "$oid": edited_by._id
+    },
+    "edited_by_user_name": edited_by.name,
 }
